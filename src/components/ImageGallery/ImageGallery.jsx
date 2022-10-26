@@ -1,9 +1,8 @@
 import { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { getPhoto } from 'components/Api/Fetch';
+import PropTypes from 'prop-types';
 import ImageGalleryItem from './ImageGalleryItem';
-
-// import css from '.';------------------------------------------- не встановлюються стилі!
+import { Loader } from 'components/Loader/Loader';
+import css from './ImageGallery.module.css';
 
 export class ImageGallery extends Component {
   render() {
@@ -11,16 +10,17 @@ export class ImageGallery extends Component {
     return (
       <>
         {isLoading ? (
-          <p>Loading.............</p>
+          <Loader />
         ) : (
-          <ul className="ImageGallery">
+          <ul className={css.ImageGallery}>
             {images.map(image => (
               <ImageGalleryItem
                 id={image.id}
                 key={image.id}
                 web={image.webformatURL}
-                large={image.largeImageURL}
+                largeImageURL={image.largeImageURL}
                 tags={image.tags}
+                toggleModal={this.props.toggleModal}
               />
             ))}
           </ul>
@@ -29,3 +29,9 @@ export class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  images: PropTypes.array.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
