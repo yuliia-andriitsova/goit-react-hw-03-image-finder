@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/yuliia-andriitsova/goit-react-hw-03-image-finder/static/css/main.cdf74e30.css",
+    "main.js": "/yuliia-andriitsova/goit-react-hw-03-image-finder/static/js/main.f21c7493.js",
+    "index.html": "/yuliia-andriitsova/goit-react-hw-03-image-finder/index.html",
+    "main.cdf74e30.css.map": "/yuliia-andriitsova/goit-react-hw-03-image-finder/static/css/main.cdf74e30.css.map",
+    "main.f21c7493.js.map": "/yuliia-andriitsova/goit-react-hw-03-image-finder/static/js/main.f21c7493.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cdf74e30.css",
+    "static/js/main.f21c7493.js"
+  ]
+}
