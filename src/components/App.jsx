@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-import { getPhoto } from './Api/Fetch';
+import { getPhoto } from '../services/Fetch';
 import { Searchbar } from './Searchbar/Searchbar';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
@@ -46,7 +46,7 @@ export class App extends Component {
       });
     }
 
-    if (this.state.page !== prevState.page) {
+    if (this.state.page !== prevState.page && this.state.page !== 1) {
       const data = await getPhoto(this.state.searchImage, this.state.page);
       this.setState(prevState => ({
         images: [...prevState.images, ...data.hits],
