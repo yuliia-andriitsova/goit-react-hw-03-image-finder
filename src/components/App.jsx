@@ -13,6 +13,8 @@ export class App extends Component {
     isError: false,
     page: 1,
     activeImage: '',
+    isOpenModal: false,
+    totalHits: 0,
   };
 
   async componentDidMount() {
@@ -21,7 +23,7 @@ export class App extends Component {
     try {
       const data = await getPhoto();
       console.log(data);
-      this.setState({ images: data });
+      this.setState({ images: data.hits });
     } catch {
       this.setState({ isError: true });
     } finally {
@@ -38,16 +40,18 @@ export class App extends Component {
       const data = await getPhoto(this.state.searchImage, this.state.page);
 
       this.setState({
-        images: data,
+        images: data.hits,
         isLoading: false,
+        totalHits: data.totalHits,
       });
     }
 
     if (this.state.page !== prevState.page) {
       const data = await getPhoto(this.state.searchImage, this.state.page);
       this.setState(prevState => ({
-        images: [...prevState.images, ...data],
+        images: [...prevState.images, ...data.hits],
         isLoading: false,
+        totalHits: data.totalHits,
       }));
     }
   }
@@ -78,7 +82,7 @@ export class App extends Component {
   };
 
   render() {
-    const { isError, images, searchImage, isLoading } = this.state;
+    const { isError, images, searchImage, isLoading, totalHits } = this.state;
     if (isError || !images) {
       return 'Not found';
     }
@@ -99,8 +103,11 @@ export class App extends Component {
           images={this.state.images}
           isLoading={this.state.isLoading}
           toggleModal={this.toggleModal}
+          toggleMod={this.toggleMod}
         />
-        {searchImage && !isLoading && <Button handleClick={this.handleClick} />}
+        {totalHits > images.length && searchImage && !isLoading && (
+          <Button handleClick={this.handleClick} />
+        )}
         {this.state.activeImage && (
           <Modal
             toggleModal={this.toggleModal}

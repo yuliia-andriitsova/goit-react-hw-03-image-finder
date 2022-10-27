@@ -4,7 +4,7 @@ import css from './ImageGalleryItem.module.css';
 
 export default class ImageGalleryItem extends Component {
   render() {
-    const { id, web, tags, largeImageURL, toggleModal } = this.props;
+    const { id, web, tags, largeImageURL, toggleModal, toggleMod } = this.props;
     return (
       <li
         className={css.ImageGalleryItem}
